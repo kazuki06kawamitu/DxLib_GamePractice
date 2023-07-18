@@ -147,6 +147,7 @@
     <ClInclude Include="GamwMainScene_.h" />
     <ClInclude Include="InputControl_cpp.h" />
     <ClInclude Include="InputControl_h.h" />
+    <ClInclude Include="SceneManager_h.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
