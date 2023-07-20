@@ -128,3 +128,36 @@ if (MoveBlockSE == -1)
 return ret;
 
 }
+/**************************************
+*ステージ制御機能：ステージの描画
+*引数：なし
+*戻り値：なし
+***************************************/
+void StageDraw(void) {
+	Draw Graph(0, 0, StageImage, FALSE);
+
+	//アイテムの取得個数を描画
+	for (int i = i = 0; i < ITEM_MAX; i++)
+	{
+		DrawRotaGraph(540, 245 + i * 30, 0.5f, 0, BlockImage[i + 1], TRUE, 0);
+		DrawFormatString(580, 235 + i * 30, 0xffffff, "%3d", Item[i]);
+	}
+	for (int i = 0; i < HEIGHT; i++)
+	{
+		for (int j = 0, j < WIDTH; j++)
+		{
+			if (Block[i][j].flg == TRUE && Block[i][j].image != NULL)
+			{
+				DrawGraph(Block[i][j].x, Block[i][j].y,
+					BlockImage[Block[i][j].image], TRUE);
+			}
+		}
+	}
+	DrawGraph(Select[SELECT_CURSOR].x * BLOCKSIZE, Select[SELECT_CURSOR].y *
+		BLOCKSIZE, BlockImage[9], TRUE);
+	if (ClickStatus != E_NONE)
+	{
+		DrawGraph(Select[NXST_CUROR].x * BLOCKSIZE,
+			select[NXST_CURSOR].y * BLOCKSIZE, BlockImage[9], TRUE);
+	}
+}
