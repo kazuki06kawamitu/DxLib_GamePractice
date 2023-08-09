@@ -5,7 +5,7 @@
 /*******************************
 *マクロ定義
 ********************************/
-#define TIMELMIT    (3600*3)//制限時間
+#define TIMELIMIT    (3600*3)//制限時間
 #define NUMBER_IMAGE_MAX (10)  //数字画像数
 
 /*******************************
@@ -61,7 +61,7 @@ if(GameCount==0)
 {
 	GameScore = 0;    //スコアの初期化
 	GameLevel = 1;    //ゲームレベルの初期化
-	Set_StagMisson(3); //ミッションの初期化
+	Set_StageMission(3); //ミッションの初期化
 	GameCount++;      //次回の設定
 }
 else
@@ -112,7 +112,7 @@ void GameMainScene_Update(void)
 	//ミッションを達成したら、ゲームクリアに
 	if (Get_StageClearFlag())
 	{
-		Chang_Scene(E_GAME_CLEAR);
+		Change_Scene(E_GAME_CLEAR);
 	}
 }
 
@@ -134,7 +134,7 @@ void GameMainScene_Draw(void)
 	StageDraw();
 
 	//フェードアウト状態か?
-	if (Get_StageStage() == 1)
+	if (Get_StageState() == 1)
 	{
 		FadeOutBlock();   ///フェードアウトする。
 	}
@@ -155,5 +155,5 @@ void GameMainScene_Draw(void)
 	} while (tmp_score > 0);
 
 	//制限時間の描画
-	DrawBox(491, 469, 209, 469, -GameTime / 60 * 2, 0x0033ff, TRUE);
+	DrawBox(491, 469, 509, 469 -GameTime / 60 * 2, 0x0033ff, TRUE);
 }
