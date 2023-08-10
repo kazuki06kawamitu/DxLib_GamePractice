@@ -140,7 +140,6 @@
     <ClCompile Include="SceneManager_.cpp" />
     <ClCompile Include="Stage_.cpp" />
     <ClCompile Include="TitleScene_.cpp" />
-    <ClCompile Include="ソース.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FreamControl.h" />
