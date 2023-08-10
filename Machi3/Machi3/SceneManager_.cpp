@@ -1,6 +1,6 @@
 #include"SceneManager.h"
 #include"TitleScene.h"
-#include"gameMainScene.h"
+#include"GameMainScene.h"
 #include"GameClearScene.h"
 #include"GameOverScene.h"
 
@@ -11,6 +11,12 @@
 /*****************************************
 *型定義
 *****************************************/
+
+/*****************************************
+*変数定義
+******************************************/
+GAME_MODE Game_Mode;      //ゲームモード情報(現在)
+GAME_MODE Next_Mode;      //ゲームモード情報(次)
 
 /****************************************
 *プロトタイプ宣言
@@ -29,13 +35,13 @@ int SceneManager_Initialize(GAME_MODE mode)
 
 	//シーン読み込み処理
 	//タイトル画面
-	Read_Error = Titlescene_Initialize();
+	Read_Error = TitleScene_Initialize();
 	if (Read_Error == D_ERROR)
 	{
 		return D_ERROR;
 	}
 	//ゲームメイン画面
-	Read_Error = GameClearScene_Initiailze();
+	Read_Error = GameMainScene_Initialize();
 	if (Read_Error == D_ERROR)
 	{
 		return D_ERROR;
@@ -50,7 +56,7 @@ int SceneManager_Initialize(GAME_MODE mode)
 	Game_Mode = mode;
 	Next_Mode = Game_Mode;
 
-	returnRead_Error;
+	return Read_Error;
 }
 
 /**********************************************
@@ -63,25 +69,25 @@ void SceneManager_Updata(void)
 	//前フレームとゲームモードが違っていたらシーンを切り替える
 	if(Game_Mode!=Next_Mode)
 	{
-		SceneManager_Initizlize(Next_Mode);
+		SceneManager_Initialize(Next_Mode);
 
 	}
 
 	//各画面の更新処理
 
-	switch (Game = Mode)
+	switch (Game_Mode)
 	{
 	case E_TITLE:
 			TitleScene_Update();
 			break;
 		case E_GAMEMAIN:
-			GameMainScene_Updata();
+			GameMainScene_Update();
 			break;
 		case E_GAME_CLEAR:
-				GameClearScene_Updata();
+				GameClearScene_Update();
 				break;
 			case E_GAME_OVER:
-					GameOverScene_Updata();
+					GameOverScene_Update();
 					break;
 				default:
 					break;
@@ -98,20 +104,20 @@ void SceneManager_Draw(void)
 	//各画面の描画処理
 	switch (Game_Mode)
 	{
-	case ETITLE:
+	case E_TITLE:
 		TitleScene_Draw();
 		break;
 	case E_GAMEMAIN:
 		GameMainScene_Draw();
 		break;
 	case E_GAME_CLEAR:
-		GameclearScene_Draw();
+		GameClearScene_Draw();
 		break;
 	case E_GAME_OVER:
 		GameOverScene_Draw();
-		berak;
-	default:
-		berak;
+		break;
+	efault:
+		break;
 	}
 }
 
@@ -120,7 +126,7 @@ void SceneManager_Draw(void)
 *引数：変更するゲームモード
 *戻り値：なし
 ***************************************/
-void Change_Scene(GAME_MODEmode)
+void Change_Scene(GAME_MODE mode)
 {
 	Next_Mode = mode;
 }

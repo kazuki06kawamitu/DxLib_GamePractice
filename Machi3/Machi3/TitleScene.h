@@ -13,5 +13,5 @@
 ******************************************/
 
 int TitleScene_Initialize(void);
-int TitleScene_Update(void);
-int TitleScene_Draw(void);
+void TitleScene_Update(void);
+void TitleScene_Draw(void);

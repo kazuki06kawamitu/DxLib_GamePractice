@@ -144,7 +144,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FreamControl.h" />
-    <ClInclude Include="GemeClearScene.h" />
+    <ClInclude Include="GameClearScene.h" />
     <ClInclude Include="GameOverScene.h" />
     <ClInclude Include="GameMainScene.h" />
     <ClInclude Include="InputControl.h" />

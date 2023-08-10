@@ -169,6 +169,8 @@ void StageDraw(void) {
 	SetFontSize(20);
 	DrawFormatString(290, 211, GetColor(255, 255, 255), "%3d", Stage_Mission);
 
+
+	//アイテムの取得個数を描画
 	for (int i = 0; i < ITEM_MAX; i++)
 	{
 		DrawRotaGraph(540, 245 + i * 30, 0.5f, 0, BlockImage[i + 1], TRUE, 0);
@@ -192,7 +194,7 @@ void CreateBlock(void)
 		{
 			for (j = 0; j < WIDTH; j++)
 			{
-				if (j == 0 || j == WIDTH - 1 | i == HEIGHT - 1 || i == 0)
+				if (j == 0 || j == WIDTH - 1 || i == HEIGHT - 1 || i == 0)
 				{
 					Block[i][j].flg = FALSE;
 					Block[i][j].image = NULL;
@@ -249,7 +251,7 @@ void SelectBlock(void)
 	int Result;
 	//カーソル座標の取得
 	Select[SELECT_CURSOR].x = GetMousePositionX() / BLOCKSIZE;
-	Select[SELECT_CURSOR].y = GetMousePositionY() / BLOCKSIZE;
+	Select[SELECT_CURSOR].y = GetMousepositionY() / BLOCKSIZE;
 
 	//選択ブロックの範囲を制御
 	if (Select[SELECT_CURSOR].x < 0)
@@ -334,7 +336,7 @@ void FadeOutBlock(void)
 	//フェードアウト効果音
 	if (CheckSoundMem(FadeOutSE) == 0)
 	{
-		PlaySoundMem(FadeOutSE, DX_PLAYTYPE_BAKC);
+		PlaySoundMem(FadeOutSE, DX_PLAYTYPE_BACK);
 	}
 
 	//描画モードをアルファブレンドにする
