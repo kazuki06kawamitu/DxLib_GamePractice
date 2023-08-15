@@ -87,8 +87,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 		//画面の内容を表画面に反映
 		ScreenFlip();
 	}
-	//入力待機
-	WaitKey();
+	
 
 	//Dxライブラリ使用の終了処理
 	DxLib_End();

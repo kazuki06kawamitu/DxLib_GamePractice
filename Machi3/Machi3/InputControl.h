@@ -20,4 +20,4 @@ int GetOldKey(int Key);
 int GetNowKey(int Key);
 int GetKeyFlg(int Key);
 int GetMousePositionX(void);
-int GetMousepositionY(void);
+int GetMousePositionY(void);

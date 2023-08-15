@@ -46,6 +46,12 @@ int SceneManager_Initialize(GAME_MODE mode)
 	{
 		return D_ERROR;
 	}
+	//ゲームクリア画面
+	Read_Error = GameClearScene_Initialize();
+	if (Read_Error == D_ERROR)
+	{
+		return D_ERROR;
+	}
 
 	//ゲームオーバー画面
 	Read_Error = GameOverScene_Initialize();
@@ -64,10 +70,10 @@ int SceneManager_Initialize(GAME_MODE mode)
 *引数：なし
 *戻り値：なし
 ***********************************************/
-void SceneManager_Updata(void)
+void SceneManager_Update(void)
 {
 	//前フレームとゲームモードが違っていたらシーンを切り替える
-	if(Game_Mode!=Next_Mode)
+	if(Game_Mode != Next_Mode)
 	{
 		SceneManager_Initialize(Next_Mode);
 

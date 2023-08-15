@@ -223,6 +223,7 @@ void CreateBlock(void)
 	 }
 	 }
 	}*/
+
 	//ブロック連鎖チェック
 		for (i = 1; i < HEIGHT - 1; i++)
 		{
@@ -251,7 +252,7 @@ void SelectBlock(void)
 	int Result;
 	//カーソル座標の取得
 	Select[SELECT_CURSOR].x = GetMousePositionX() / BLOCKSIZE;
-	Select[SELECT_CURSOR].y = GetMousepositionY() / BLOCKSIZE;
+	Select[SELECT_CURSOR].y = GetMousePositionY() / BLOCKSIZE;
 
 	//選択ブロックの範囲を制御
 	if (Select[SELECT_CURSOR].x < 0)
@@ -311,7 +312,9 @@ void SelectBlock(void)
 		if (Result == 0)
 		{
 			int TmpBlock = Block[Select[NEXT_CURSOR].y + 1][Select[NEXT_CURSOR].x + 1].image;
-			Block[Select[NEXT_CURSOR].y + 1][Select[TMP_CURSOR].x + 1].image = TmpBlock;
+			Block[Select[NEXT_CURSOR].y + 1][Select[TMP_CURSOR].x + 1].image = Block[Select[TMP_CURSOR].y+1]
+				[Select[TMP_CURSOR].x+1].image;
+			Block[Select[TMP_CURSOR].y + 1][Select[TMP_CURSOR].x + 1].image = TmpBlock;
 		}
 		else
 		{
@@ -476,9 +479,9 @@ void CheckClear(void)
 *引数：なし
 *戻り値：ミッションがクリアしているか
 ***********************************/
-	int Get_StageScore(void)
+	int Get_StageClearFlag(void)
 	{
-		return Stage_Score;
+		return ClearFlag;
 	}
 /***********************************
 *ステージ制御機能：ミッション情報取得処理
@@ -486,7 +489,7 @@ void CheckClear(void)
 *戻り値：ミッションがクリアしているか
 ************************************/
 
-	int Get_Stage_Score(void)
+	int Get_StageScore(void)
 	{
 		return Stage_Score;
 	}

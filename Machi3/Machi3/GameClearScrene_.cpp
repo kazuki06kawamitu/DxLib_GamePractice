@@ -13,7 +13,7 @@
 /***********************************
 *•Ï”éŒ¾
 ************************************/
-int GameClearImage; 
+int GameClearImage;
 int GameClearSE;
 int GameClearFlag;
 
