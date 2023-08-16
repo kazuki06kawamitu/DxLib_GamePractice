@@ -77,12 +77,12 @@ int StageInitialize(void)
 	int i;
 
 	//âÊëúì«Ç›çûÇ›
-	LoadDivGraph("image/block.png", BLOCK_IMAGE_MAX, BLOCK_IMAGE_MAX, 1,
+	LoadDivGraph("images/block.png", BLOCK_IMAGE_MAX, BLOCK_IMAGE_MAX, 1,
 		BLOCKSIZE,BLOCKSIZE, BlockImage);
 	StageImage = LoadGraph("images/stage.png");
 	
 	//âπåπì«Ç›çûÇ›
-ClickSE = LoadSoundMem("sounds/click_semp3");
+ClickSE = LoadSoundMem("sounds/click_se.mp3");
 FadeOutSE = LoadSoundMem("sounds/fadeout_se.mp3");
 MoveBlockSE = LoadSoundMem("sounds/moveblock_se.mp3");
 
@@ -280,7 +280,7 @@ void SelectBlock(void)
 		if (ClickStatus == E_NONE) {
 			Select[NEXT_CURSOR].x = Select[SELECT_CURSOR].x;
 			Select[NEXT_CURSOR].y = Select[SELECT_CURSOR].y;
-			ClickStatus == E_ONCE;
+			ClickStatus = E_ONCE;
 		}
 		else if (ClickStatus == E_ONCE && ((abs(Select[NEXT_CURSOR].x - Select[SELECT_CURSOR].x)
 			== 1 &&

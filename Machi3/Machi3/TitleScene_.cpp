@@ -33,7 +33,9 @@ int TitleScene_Initialize(void)
 	int ret = 0;
 
 	//‰æ‘œ“Ç‚İ‚İˆ—
-	TitleImage = LoadSoundMem("sounds/title_bgm.mp3");
+	TitleImage = LoadGraph("images/title.png");
+	//‰¹Œ¹“Ç‚İ‚İˆ—
+	TitleBGM = LoadSoundMem("sounds/title_bgm.mp3");
 
 	if (TitleImage == D_ERROR)
 	{
