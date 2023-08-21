@@ -167,14 +167,14 @@ void StageDraw(void) {
 
 	//ミッションを描画
 	SetFontSize(20);
-	DrawFormatString(290, 211, GetColor(255, 255, 255), "%3d", Stage_Mission);
+	DrawFormatString(590, 211, GetColor(255, 255, 255), "%3d", Stage_Mission);
 
 
 	//アイテムの取得個数を描画
 	for (int i = 0; i < ITEM_MAX; i++)
 	{
 		DrawRotaGraph(540, 245 + i * 30, 0.5f, 0, BlockImage[i + 1], TRUE, 0);
-		DrawFormatString(280, 235 + i * 30, GetColor(255, 255, 255), "%3d", Item[i]);
+		DrawFormatString(580, 235 + i * 30, GetColor(255, 255, 255), "%3d", Item[i]);
 	}
 }
 
