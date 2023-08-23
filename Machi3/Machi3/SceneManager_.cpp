@@ -73,7 +73,7 @@ int SceneManager_Initialize(GAME_MODE mode)
 void SceneManager_Update(void)
 {
 	//前フレームとゲームモードが違っていたらシーンを切り替える
-	if(Game_Mode != Next_Mode)
+	if (Game_Mode != Next_Mode)
 	{
 		SceneManager_Initialize(Next_Mode);
 
@@ -84,19 +84,19 @@ void SceneManager_Update(void)
 	switch (Game_Mode)
 	{
 	case E_TITLE:
-			TitleScene_Update();
-			break;
-		case E_GAMEMAIN:
-			GameMainScene_Update();
-			break;
-		case E_GAME_CLEAR:
-				GameClearScene_Update();
-				break;
-			case E_GAME_OVER:
-					GameOverScene_Update();
-					break;
-				default:
-					break;
+		TitleScene_Update();
+		break;
+	case E_GAMEMAIN:
+		GameMainScene_Update();
+		break;
+	case E_GAME_CLEAR:
+		GameClearScene_Update();
+		break;
+	case E_GAME_OVER:
+		GameOverScene_Update();
+		break;
+	default:
+		break;
 	}
 }
 
@@ -122,7 +122,7 @@ void SceneManager_Draw(void)
 	case E_GAME_OVER:
 		GameOverScene_Draw();
 		break;
-	efault:
+	default:
 		break;
 	}
 }

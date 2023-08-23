@@ -102,7 +102,7 @@ int GetNowKey(int Key)
 int GetKeyFlg(int Key)
 {
 	int ret = FALSE;
-	int Keyflg = now_button & old_button;
+	int Keyflg = now_button & ~old_button;
 
 	if ((Key & Keyflg) != FALSE)
 	{

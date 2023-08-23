@@ -51,27 +51,27 @@ int GameMainScene_Initialize(void)
 	{
 		if (NumberImage[i] == D_ERROR)
 		{
-           ret = D_ERROR;
-		   break;
+			ret = D_ERROR;
+			break;
 		}
-		
+
 	}
 	//ゲームプレイが初回かどうか？
-if(GameCount==0)
-{
-	GameScore = 0;    //スコアの初期化
-	GameLevel = 1;    //ゲームレベルの初期化
-	Set_StageMission(3); //ミッションの初期化
-	GameCount++;      //次回の設定
-}
-else
-{
-	GameLevel++;      //ゲームレベルの更新
-	Set_StageMission(3);  //ミッションを増やす
-}
-GameTime = TIMELIMIT;    //制限時間の初期化
+	if (GameCount == 0)
+	{
+		GameScore = 0;    //スコアの初期化
+		GameLevel = 1;    //ゲームレベルの初期化
+		Set_StageMission(3); //ミッションの初期化
+		GameCount++;      //次回の設定
+	}
+	else
+	{
+		GameLevel++;      //ゲームレベルの更新
+		Set_StageMission(3);  //ミッションを増やす
+	}
+	GameTime = TIMELIMIT;    //制限時間の初期化
 
-return ret;
+	return ret;
 
 }
 
@@ -155,5 +155,5 @@ void GameMainScene_Draw(void)
 	} while (tmp_score > 0);
 
 	//制限時間の描画
-	DrawBox(491, 469, 509, 469 -GameTime / 60 * 2, 0x0033ff, TRUE);
+	DrawBox(491, 469, 509, 469 - GameTime / 60 * 2, 0x0033ff, TRUE);
 }
