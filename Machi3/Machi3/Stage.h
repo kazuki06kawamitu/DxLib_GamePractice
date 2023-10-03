@@ -20,6 +20,7 @@ void FadeOutBlock(void);
 void MoveBlock(void);
 void CheckBlock(void);
 void CheckClear(void);
+void Stage_Update(void);
 
 int Get_StageState(void);
 int Get_StageClearFlag(void);

@@ -56,6 +56,7 @@ int StageImage;                   //背景用画像
 int ClickSE;                      //クリックSE
 int FadeOutSE;                    //フェードアウトSE
 int MoveBlockSE;                  //ブロック移動SE
+//int StageBGM;
 
 /********************************************
 *プロトタイプ宣言
@@ -85,6 +86,8 @@ int StageInitialize(void)
 	ClickSE = LoadSoundMem("sounds/click_se.mp3");
 	FadeOutSE = LoadSoundMem("sounds/fadeout_se.mp3");
 	MoveBlockSE = LoadSoundMem("sounds/moveblock_se.mp3");
+	//StageBGM = LoadSoundMem("sounds/rock_bgm.mp3");
+	
 
 	//ブロック生成処理
 	CreateBlock();
@@ -126,10 +129,27 @@ int StageInitialize(void)
 	{
 		ret = -1;
 	}
+	//if (StageBGM == -1)
+	{
+		//ret = -1;
+	}
 
 	return ret;
 
 }
+
+/******************************************
+*ステージ更新処理
+******************************************/
+void Stage_Update(void)
+{
+	//if (CheckSoundMem(StageBGM) == 0)
+	{
+		//PlaySoundMem(StageBGM, DX_PLAYTYPE_BACK);
+	}
+}
+
+
 /**************************************
 *ステージ制御機能：ステージの描画
 *引数：なし
@@ -176,13 +196,18 @@ void StageDraw(void) {
 		DrawRotaGraph(540, 245 + i * 30, 0.5f, 0, BlockImage[i + 1], TRUE, 0);
 		DrawFormatString(580, 235 + i * 30, GetColor(255, 255, 255), "%3d", Item[i]);
 	}
+	//
+	//if (CheckSoundMem(StageBGM) == 0)
+	{
+		//PlaySoundMem(StageBGM, DX_PLAYTYPE_BACK);
+	}
 }
 
 /************************************************
 *ステージ制御機能：ブロック生成処理
 *引数：なし
 *戻り値：なし
-*************************************************/
+**************************************************/
 void CreateBlock(void)
 {
 	int Check = 0;
@@ -300,6 +325,8 @@ void SelectBlock(void)
 		Block[Select[NEXT_CURSOR].y + 1][Select[NEXT_CURSOR].x + 1].image =
 			Block[Select[TMP_CURSOR].y + 1][Select[TMP_CURSOR].x + 1].image;
 		Block[Select[TMP_CURSOR].y + 1][Select[TMP_CURSOR].x + 1].image = TmpBlock;
+
+		//交換した時操作時間をかいしする
 		//連鎖が3つ以上か調べる。
 		Result = 0;
 		Result += combo_check(Select[NEXT_CURSOR].y + 1, Select[NEXT_CURSOR].x + 1);
@@ -458,7 +485,7 @@ void CheckClear(void)
 	{
 		Stage_State = 0;
 	}
-
+	
 }
 /**************************************
 	*ステージ制御機能：ステージステータス情報取得処理
@@ -471,6 +498,7 @@ int Get_StageState(void)
 	return Stage_State;
 }
 
+
 /**********************************
 *ステージ制御機能：ミッションがクリアしているか
 *引数：なし
@@ -479,6 +507,7 @@ int Get_StageState(void)
 int Get_StageClearFlag(void)
 {
 	return ClearFlag;
+	
 }
 /***********************************
 *ステージ制御機能：ミッション情報取得処理
@@ -489,6 +518,7 @@ int Get_StageClearFlag(void)
 int Get_StageScore(void)
 {
 	return Stage_Score;
+	
 }
 /*********************************
 *ステージ制御機能：ミッション情報取得処理
