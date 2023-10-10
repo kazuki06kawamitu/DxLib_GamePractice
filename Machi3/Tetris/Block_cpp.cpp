@@ -5,7 +5,7 @@
 /***************************************
 *マクロ定義
 ***************************************/
-#define FIELD_HEIGT (21)       //フィールドのマスの高さ
+#define FIELD_HEIGHT (21)       //フィールドのマスの高さ
 #define FIELD_WIDTH (12)       //フィールドのマスの幅
 #define BLOCK_TROUT_SIZE (4)   //ブロックのマスサイズ
 #define BLOCK_SIZE  (36)       //１ブロックの当たりのサイズ
@@ -43,6 +43,124 @@ enum BLOCK_STATE
 *******************************************/
 const int C_BLOCK_TABLE[BLOCK_TYPE_MAX][BLOCK_TROUT_SIZE][BLOCK_TROUT_SIZE] = {
 	{
-
-}
+	 {0,0,0,0},
+	 {0,1,1,0},
+	 {0,1,1,0},
+	 {0,0,0,0}
+	},
+	{
+	{0,0,0,0},
+	{0,0,0,0},
+	{2,2,2,2},
+	{0,0,0,0}
+    },
+	{
+	{0,0,0,0},
+	{0,5,5,0},
+	{0,0,5,5},
+	{0,0,0,0}
+    },
+	{
+	{0,0,0,0},
+	{0,6,6,0},
+	{6,6,0,0},
+	{0,0,0,0}
+    },
+	{
+	{0,0,0,0},
+	{0,7,0,0},
+	{7,7,7,0},
+	{0,0,0,0}
+    }
 };
+
+/*****************************************
+*変数宣言
+*****************************************/
+int BlockImage[E_BLOCK_IMAGE_MAX];                     //ブロック画像
+BLOCK_STATE Field[FIELD_HEIGHT][FIELD_WIDTH];          //フィールド配列
+BLOCK_STATE Next[BLOCK_TROUT_SIZE][BLOCK_TROUT_SIZE];  //待機状態のブロック
+BLOCK_STATE Stock[BLOCK_TROUT_SIZE][BLOCK_TROUT_SIZE]; //ストックのブロック
+BLOCK_STATE DropBlock[BLOCK_TROUT_SIZE][BLOCK_TROUT_SIZE];//落ちるブロック
+int DropBlock_x;                                       //落ちるブロックのx座標
+int DropBlock_y;                                       //落ちるブロックy座標
+
+int WaitTime;  //待機時間
+int Stock_Flg; //ストックフラグ
+int Generate_Flg;//生成フラグ
+int DeleteLine;  //消したラインの数
+int SoundEffect; //SE
+
+/********************************************
+*プロトタイプ宣言
+*********************************************/
+void create_field(void);             //フィールドの生成処理
+void create_block(void);             //ブロックの生成syp炉
+void moveblock(void);              //ブロックの移動処理
+void change_block(void);           //ブロック交換処理
+void turn_block(int clockwise);    //ブロック回転処理
+int check_overlap(int x, int y);   //範囲外チェック処理
+void lock_block(int x, int y);     //着地したブロックを固定済みに変更する処理
+void check_line(void);             //ブロックの横一列確認処理
+
+/********************************************
+*ブロック機能:初期化処理
+*引数:なし
+*戻り値:エラー情報(-1:異常,それ以外:正常)
+*********************************************/
+int Block_Initialize(void)
+{
+	int ret = 0;  //戻り値
+	int i = 0;
+
+	//ブロック画像の読み込み
+	ret = LoadDivGraph("images/block.pug", E_BLOCK_IMAGE_MAX, 10, 1, BLOCK_SIZE,
+		BLOCK_SIZE, BlockImage);
+
+	//SEの読み込み
+	SoundEffect[0] = LoadSoundMem("sounds/SE3.mp3");
+	SoundEffect[1] = LoadSoundMem("sounds/SE4.mp3");
+	SoundEffect[2] = LoadSoundMem("sounds/SE5.wav");
+
+	//音量の調整
+	ChangeVolumeSoundMem(150, SoundEffect[0]);
+	ChangeVolumeSoundMem(150, SoundEffect[1]);
+	ChangeVolumeSoundMem(130, SoundEffect[2]);
+	//フィールドの生成
+	create_field();
+
+	//ブロック生成
+	create_block();
+	create_block();
+
+	//待機時間の初期化
+	WaitTime = 0;
+	//ストックグラフの初期化
+	Stock_Flg = FALSE;
+	//生成フラグの初期化
+	Generate_Flg = TRUE;
+	//消したラインの数の初期化
+	DeleteLine = 0;
+
+	//エラーチェック
+	for (i = 0; i < 3; i++)
+	{
+		if (SoundEffect[i] == -1)
+		{
+			ret = -1;
+			break;
+		}
+	}
+	return ret;
+}
+
+/*****************************************
+*ブロック機能:更新処理
+*引数:なし
+*戻り値:なし
+*****************************************/
+void Block_Update(void)
+	{
+	//ブロックの移動処理
+	move_block();
+	}
