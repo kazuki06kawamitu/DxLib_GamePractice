@@ -365,4 +365,124 @@ void move_block(void)
 	}
 
 	//下入力時(ソフトドロップ処理)
+	if (GetButtonDown(XINPUT_BUTTON_DPAD_UP))
+	{
+		while (check_overlap(DropBlock_x, DropBlock_y + 1) == TRUE)
+		{
+			DropBlock_y++;
+		}
+	}
+
+	//下入力時(ソフトドロップ処理)
+	if (GetButton(XINPUT_BUTTON_DPAD_DOWN))
+	{
+		while (check_overlap(DropBlock_x, DropBlock_y + 1) == TRUE)
+		{
+			DropBlock_y++;
+		}
+	}
+}
+
+/************************************
+*ブロック機能:ストック交換処理
+*引数:なし
+*戻り値:なし
+*************************************/
+void change_block(void)
+{
+	BLOCK_STATE temp[BLOCK_TROUT_SIZE][BLOCK_TROUT_SIZE] = { E_BLOCK_EMPTY };  //退避領域
+	int i, j;  //ループカウンタ
+
+	//ストック先が空かどうか確認
+	if (Stock_Flg == TRUE)
+	{
+		for (i = 0; i < BLOCK_TROUT_SIZE; i++)
+		{
+			for (j = 0; j < BLOCK_TROUT_SIZE; j++)
+			{
+				temp[i][j] = DropBlock[i][j];
+				DropBlock[i][j] = Stock[i][j];
+				Stock[i][j] = temp[i][j];
+			}
+		}
+	}
+	else
+	{
+		Stock_Flg = TRUE;
+		for (i = 0; i< BLOCK_TROUT_SIZE; i++)
+		{
+			for (j = 0; j < BLOCK_TROUT_SIZE; j++)
+			{
+				Stock[i][j] = DropBlock[i][j];
+			}
+		}
+		//新しいブロックの設定と次ののブロックの生成
+		create_block();
+	}
+}
+
+/*****************************************
+*ブロック機能:ブロック交換処理
+*引数:回転指せる向き(0:時計回り 1:反時計回り)
+*戻り値:なし
+******************************************/
+void turn_block(int clockwise)
+{
+	BLOCK_STATE temp[BLOCK_TROUT_SIZE][BLOCK_TROUT_SIZE] = { E_BLOCK_EMPTY };  //退避領域
+	int i, j;  //ループカウンタ
+	do
+	{
+		if (clockwise == TURN_CROCKWICE)
+		{
+			//ブロックを一時保持する
+			for (i = 0; i < BLOCK_TROUT_SIZE; i++)
+			{
+				for (j - 0; j < BLOCK_TROUT_SIZE; j++)
+				{
+					temp[j][3 - i] = DropBlock[i][j];
+				}
+			}
+		}
+		else
+		{
+			//ブロックを一時保持する
+			for (i = 0; i < BLOCK_TROUT_SIZE; i++)
+			{
+				for (j = 0; j < BLOCK_TROUT_SIZE; j++)
+				{
+					DropBlock[i][j] = temp[i][j];
+				}
+			}
+		}
+
+		//ブロック回転
+		for (i = 0; i < BLOCK_TROUT_SIZE; i++)
+		{
+			for (j = i; i < BLOCK_TROUT_SIZE; j++)
+			{
+				DropBlock[i][j] = temp[i][j];
+			}
+		}
+
+		//壁側の補正処理
+		if (check_overlap(DropBlock_x, DropBlock_y) && DropBlock_x >= E_BLOCK_WALL)
+		{
+			DropBlock_x--;
+		}
+		if (check_overlap(DropBlock_x, DropBlock_y) && DropBlock_x <= E_BLOCK_EMPTY)
+		{
+			DropBlock_x++;
+		}
+	}while (check_overlap(DropBlock_x, DropBlock_y) == FALSE);
+		PlaySoundMem(SoundEffect[2], DX_PLAYTYPE_BACK,TRUE);
+}
+
+/********************************************
+*ブロック機能:範囲外チェック処理
+*引数:落下ブロックの座標(x,y)
+*戻り値:TREU(範囲内),FALSE(範囲外)
+*********************************************/
+int check_overlap(int x, int y)
+{
+	int i, j;  //ループカウンタ
 }
