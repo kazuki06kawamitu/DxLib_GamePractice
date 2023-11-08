@@ -11,8 +11,8 @@
 /**************************************
 *プロトタイプ宣言
 **************************************/
-int GemeMainScene_Initialize(void);
+int GameMainScene_Initialize(void);
 void GameMainScene_Update(void);
-void gameMainScene_Draw(void);
+void GameMainScene_Draw(void);
 
 int Get_Score(void);

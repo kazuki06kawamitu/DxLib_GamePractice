@@ -165,8 +165,8 @@ void Block_Update(void)
 	move_block();
 
 	//ブロックのストック
-	if ((GetButtonDraw(XINPUT_BUTTON_LEFT_SHOULDER) == TRUE) ||
-		(GetButtonDraw(XINPUT_BUTTON_RIGHT_SHOULDER) == TRUE))
+	if ((GetButtonDown(XINPUT_BUTTON_LEFT_SHOULDER) == TRUE) ||
+		(GetButtonDown(XINPUT_BUTTON_RIGHT_SHOULDER) == TRUE))
 	{
 		//生成可能であれば
 		if (Generate_Flg == TRUE)
@@ -177,15 +177,15 @@ void Block_Update(void)
 	}
 
 	//ブロックの回転(反時計回り)
-	if ((GetButtonDraw(XINPUT_BUTTON_A) == TRUE) ||
-		(GetButtonDraw(XINPUT_BUTTON_Y) == TRUE))
+	if ((GetButtonDown(XINPUT_BUTTON_A) == TRUE) ||
+		(GetButtonDown(XINPUT_BUTTON_Y) == TRUE))
 	{
 		turn_block(TURN_ANTICROKWICE);
 	}
 
 	//ブロックの回転(時計回り)
-	if ((GetButtonDraw(XINPUT_BUTTON_B) == TRUE) ||
-		(GetButtonDraw(XINPUT_BUTTON_X) == TRUE))
+	if ((GetButtonDown(XINPUT_BUTTON_B) == TRUE) ||
+		(GetButtonDown(XINPUT_BUTTON_X) == TRUE))
 	{
 		turn_block(TURN_CROCKWICE);
 	}
