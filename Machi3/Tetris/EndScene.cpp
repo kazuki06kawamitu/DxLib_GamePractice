@@ -23,7 +23,7 @@ int wait_count;
 *引数:なし
 *戻り値:エラー情報(-1:異常有,-1以外:正常)
 *********************************************/
-int EndScene_Initalize(void)
+int EndScene_Initialize(void)
 {
 	int ret = 0;
 	wait_count = 0;
@@ -38,6 +38,16 @@ int EndScene_Initalize(void)
 void EndScene_Update(void)
 {
 	wait_count++;
+}
+
+/*******************************************
+*エンド画面:描画処理
+*引数：なし
+*戻り値:なし
+*******************************************/
+void EndScene_Draw(void)
+{
+	DrawString(10, 10, "エンド画面です", GetColor(255, 255, 255));
 }
 
 /********************************************

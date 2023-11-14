@@ -120,7 +120,7 @@ void SceneManager_Draw(void)
 *引数:変更するゲームモード
 *戻り値:なし
 ********************************************/
-void Change_Scene(GAME_MODE moed)
+void Change_Scene(GAME_MODE mode)
 {
 	next_mode = mode;
 }

@@ -89,7 +89,7 @@ int WaitTime;  //待機時間
 int Stock_Flg; //ストックフラグ
 int Generate_Flg;//生成フラグ
 int DeleteLine;  //消したラインの数
-int SoundEffect; //SE
+int SoundEffect[3]; //SE
 
 /********************************************
 *プロトタイプ宣言
@@ -114,7 +114,7 @@ int Block_Initialize(void)
 	int i = 0;
 
 	//ブロック画像の読み込み
-	ret = LoadDivGraph("images/block.pug", E_BLOCK_IMAGE_MAX, 10, 1, BLOCK_SIZE,
+	ret = LoadDivGraph("images/block.png", E_BLOCK_IMAGE_MAX, 10, 1, BLOCK_SIZE,
 		BLOCK_SIZE, BlockImage);
 
 	//SEの読み込み
@@ -288,7 +288,7 @@ void create_field(void)
 	int i, j;    // ループカウンタ
 
 	//フィールドの生成
-	for (i = 0; j < FIELD_HEIGHT; i++)
+	for (i = 0; i < FIELD_HEIGHT; i++)
 	{
 		for (j = 0; j < FIELD_WIDTH; j++)
 		{
@@ -437,7 +437,7 @@ void turn_block(int clockwise)
 			//ブロックを一時保持する
 			for (i = 0; i < BLOCK_TROUT_SIZE; i++)
 			{
-				for (j - 0; j < BLOCK_TROUT_SIZE; j++)
+				for (j = 0; j < BLOCK_TROUT_SIZE; j++)
 				{
 					temp[j][3 - i] = DropBlock[i][j];
 				}
@@ -458,7 +458,7 @@ void turn_block(int clockwise)
 		//ブロック回転
 		for (i = 0; i < BLOCK_TROUT_SIZE; i++)
 		{
-			for (j = i; i < BLOCK_TROUT_SIZE; j++)
+			for (j = 0; i < BLOCK_TROUT_SIZE; j++)
 			{
 				DropBlock[i][j] = temp[i][j];
 			}
@@ -511,7 +511,7 @@ void lock_block(int x, int y)
 {
 	int i, j;  //ループカウンタ
 
-	for (i = 0; i, BLOCK_TROUT_SIZE; i++)
+	for (i = 0; i < BLOCK_TROUT_SIZE; i++)
 	{
 		for (j = 0; j < BLOCK_TROUT_SIZE; j++)
 		{
