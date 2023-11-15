@@ -56,6 +56,18 @@ const int C_BLOCK_TABLE[BLOCK_TYPE_MAX][BLOCK_TROUT_SIZE][BLOCK_TROUT_SIZE] = {
     },
 	{
 	{0,0,0,0},
+	{3,0,0,0},
+	{3,3,3,0},
+	{0,0,0,0}
+	},
+	{
+	{0,0,0,0},
+	{0,0,0,4},
+	{0,4,4,4},
+	{0,0,0,0}
+	},
+	{
+	{0,0,0,0},
 	{0,5,5,0},
 	{0,0,5,5},
 	{0,0,0,0}
@@ -346,7 +358,7 @@ void create_block(void)
 *************************************/
 void move_block(void)
 {
-	//左入力
+	//左入力時
 	if (GetButtonDown(XINPUT_BUTTON_DPAD_LEFT))
 	{
 		if (check_overlap(DropBlock_x - 1, DropBlock_y) == TRUE)
@@ -355,7 +367,7 @@ void move_block(void)
 		}
 	}
 
-	//右入力
+	//右入力時
 	if (GetButtonDown(XINPUT_BUTTON_DPAD_RIGHT))
 	{
 		if (check_overlap(DropBlock_x, DropBlock_y + 1) == TRUE)
@@ -364,7 +376,7 @@ void move_block(void)
 		}
 	}
 
-	//下入力時(ソフトドロップ処理)
+	//上入力時(ソフトドロップ処理)
 	if (GetButtonDown(XINPUT_BUTTON_DPAD_UP))
 	{
 		while (check_overlap(DropBlock_x, DropBlock_y + 1) == TRUE)
@@ -376,7 +388,7 @@ void move_block(void)
 	//下入力時(ソフトドロップ処理)
 	if (GetButton(XINPUT_BUTTON_DPAD_DOWN))
 	{
-		while (check_overlap(DropBlock_x, DropBlock_y + 1) == TRUE)
+		if (check_overlap(DropBlock_x, DropBlock_y + 1) == TRUE)
 		{
 			DropBlock_y++;
 		}
@@ -450,7 +462,7 @@ void turn_block(int clockwise)
 			{
 				for (j = 0; j < BLOCK_TROUT_SIZE; j++)
 				{
-					DropBlock[i][j] = temp[i][j];
+					temp[3-j][i] = DropBlock[i][j];
 				}
 			}
 		}
@@ -458,7 +470,7 @@ void turn_block(int clockwise)
 		//ブロック回転
 		for (i = 0; i < BLOCK_TROUT_SIZE; i++)
 		{
-			for (j = 0; i < BLOCK_TROUT_SIZE; j++)
+			for (j = 0; j < BLOCK_TROUT_SIZE; j++)
 			{
 				DropBlock[i][j] = temp[i][j];
 			}
@@ -474,6 +486,7 @@ void turn_block(int clockwise)
 			DropBlock_x++;
 		}
 	}while (check_overlap(DropBlock_x, DropBlock_y) == FALSE);
+
 		PlaySoundMem(SoundEffect[2], DX_PLAYTYPE_BACK,TRUE);
 }
 
