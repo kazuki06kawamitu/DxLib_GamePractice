@@ -121,7 +121,7 @@ void TitleScene_Update(void)
 ***************************************************/
 void TitleScene_Draw(void)
 {
-	SetFontSize(50);
+	SetFontSize(55);
 	DrawString(100, 100, "テトリス", GetColor(255, 255, 255));
 	DrawString(300, 300, "スタート", GetColor(255, 255, 255));
 	DrawString(300, 350, "ランキング", GetColor(255, 255, 255)); 

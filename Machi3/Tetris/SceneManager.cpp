@@ -50,7 +50,7 @@ void SceneManager_Initialize(GAME_MODE mode)
 		break;
 	case E_END:
 	default:
-		EndScene_Initialize();
+		EndScene_Initialize();                       //ƒGƒ“ƒh‰æ–Ê‚Ì‰Šú‰»
 		break;
 	}
 	game_mode = mode;

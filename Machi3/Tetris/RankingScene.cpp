@@ -62,7 +62,7 @@ int RankingScene_Initialize(void)
 		name_num = 0;
 		break;
 	case RANKING_DISP_MODE:
-	defaut:
+	default:
 
 		break;
 	}
@@ -117,8 +117,8 @@ void RankingScene_Draw(void)
 }
 
 /*****************************************
-*ランキング画面:スコア取得処理
-*引数:なし
+*ランキング画面:画面変更処理
+*引数：なし
 *戻り値:なし
 ******************************************/
 void Set_RankingMode(int mode)
@@ -126,7 +126,7 @@ void Set_RankingMode(int mode)
 	DispMode = mode;
 }
 
-/******************************************
+/*****************************************
 *ランキング画面:スコア取得処理
 *引数:なし
 *戻り値:なし
@@ -177,21 +177,20 @@ void file_write(void)
 	FILE* fp = NULL;
 	int i;
 
-	OutputDebugString("ファイルを読み込みます");
-	fopen_s(&fp, RANKING_FILE, "r");
+	OutputDebugString("ファイルを書き込みます");
+	fopen_s(&fp, RANKING_FILE, "w");
 
 	if (fp == NULL)
 	{
-		OutputDebugString("ファイルが読み込めません");
-		OutputDebugString("ファイルを生成します");
-		file_write();
+		OutputDebugString("ファイルが書き込めません");
+		
 	}
 	else
 	{
 		for (i = 0; i < RANKING_MAX; i++)
 		{
-			fscanf_s(fp, "%2d,%[^,]%10\n", &Ranking_Data[i].rank,
-				Ranking_Data[i].name, RANKING_NAME_LEN, &Ranking_Data[i].score);
+			fprintf(fp, "%2d,%[^,],%10d\n", Ranking_Data[i].rank,
+				Ranking_Data[i].name, Ranking_Data[i].score);
 		}
 
 		fclose(fp);
@@ -207,6 +206,9 @@ void ranking_sort(void)
 {
 	int i, j;    //ループカウンタ
 	T_RANKING tmp;  //退避領域
+
+	//一番下のスコアを更新する
+	Ranking_Data[RANKING_MAX - 1] = New_Score;
 
 	//データのソートを行う
 	for (i = 0; i < RANKING_MAX; i++)
@@ -290,10 +292,10 @@ void ranking_input_name(void)
 				c = '0' + Cursor.x;
 				New_Score.name[name_num++] = c;
 			}
-			else if(Cursor.x==10)
+			else if(Cursor.x== 10)
 			{
 				name_num--;
-				New_Score.name[name_num] = '\n';
+				New_Score.name[name_num] = '\0';
 			}
 			else
 			{
@@ -313,13 +315,14 @@ void ranking_input_name_draw(void)
 {
 	int i;
 
-	SetFontSize(40); DrawFormatString(300, 150, GetColor(255, 255, 255), "名前を入力してください");
+	SetFontSize(40);
+	DrawFormatString(300, 150, GetColor(255, 255, 255), "名前を入力してください");
 
 	//選択用文字を描画
 	for (i = 0; i < 26; i++)
 	{
 		DrawFormatString((i % 13 * 50) + 300, (i / 13 * 50) + 330, GetColor(255, 255, 255), "%-3c", 'a' + i);
-		DrawFormatString((i % 13 * 50) + 300, (i / 13 * 50) + 300, GetColor(255, 255, 255), "%-3c", 'A' + i);
+		DrawFormatString((i % 13 * 50) + 300, (i / 13 * 50) + 430, GetColor(255, 255, 255), "%-3c", 'A' + i);
 	}
 	for (i = 0; i < 10; i++)
 	{
