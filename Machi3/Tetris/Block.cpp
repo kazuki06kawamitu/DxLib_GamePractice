@@ -370,7 +370,7 @@ void move_block(void)
 	//‰E“ü—ÍŽž
 	if (GetButtonDown(XINPUT_BUTTON_DPAD_RIGHT))
 	{
-		if (check_overlap(DropBlock_x, DropBlock_y + 1) == TRUE)
+		if (check_overlap(DropBlock_x + 1, DropBlock_y) == TRUE)
 		{
 			DropBlock_x++;
 		}
